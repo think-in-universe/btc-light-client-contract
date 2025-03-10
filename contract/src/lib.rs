@@ -504,16 +504,16 @@ impl BtcLightClient {
             new_target = POW_LIMIT;
         }
 
-        let expected_bits = new_target.target_to_bits();
-
-        #[cfg(not(feature = "testnet"))]
-        require!(
-            expected_bits == block_header.bits,
-            format!(
-                "Error: Incorrect target. Expected bits: {:?}, Actual bits: {:?}",
-                expected_bits, block_header.bits
-            )
-        );
+        #[cfg(not(feature = "testnet"))] {
+            let expected_bits = new_target.target_to_bits();
+            require!(
+                expected_bits == block_header.bits,
+                format!(
+                    "Error: Incorrect target. Expected bits: {:?}, Actual bits: {:?}",
+                    expected_bits, block_header.bits
+                )
+            );
+        }
     }
 
     /// The most expensive operation which reorganizes the chain, based on fork weight
