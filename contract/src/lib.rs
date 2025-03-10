@@ -514,12 +514,6 @@ impl BtcLightClient {
                 expected_bits, block_header.bits
             )
         );
-
-        #[cfg(feature = "testnet")] {
-            if expected_bits != block_header.bits {
-                self.check_target_testnet(block_header, prev_block_header);
-            }
-        }
     }
 
     /// The most expensive operation which reorganizes the chain, based on fork weight
